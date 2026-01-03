@@ -40,11 +40,10 @@ import com.example.composedemo.home.domain.model.Character
  * Created by  Ajeet Singh on Date: 11/08/25.
  */
 @Composable
-fun DetailsScreenCore(innerPadding: PaddingValues, character: Character) {
+fun DetailsScreenCore(character: Character) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
             .verticalScroll(rememberScrollState())
         , horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top
     ) {

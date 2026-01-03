@@ -57,11 +57,10 @@ import java.net.URLEncoder
  * Created by  Ajeet Singh on Date: 09/08/25.
  */
 @Composable
-fun HomeScreenCore(navController: NavController, innerPadding: PaddingValues, viewModel: HomeViewModel = koinViewModel()) {
+fun HomeScreenCore(navController: NavController, viewModel: HomeViewModel = koinViewModel()) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
     ) {
         HomeScreen(navController, viewModel.homeState, viewModel::handleActions)
     }

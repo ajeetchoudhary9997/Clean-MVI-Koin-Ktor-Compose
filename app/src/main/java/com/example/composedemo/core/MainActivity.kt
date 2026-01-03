@@ -67,12 +67,12 @@ class MainActivity : ComponentActivity() {
                         TopAppBarState(navController,topBarTitle,isHome)
                     }) { innerPadding ->
                     NavHost(
-                        navController, startDestination = HomeScreen,
+                        navController, startDestination = HomeScreen, modifier = Modifier.padding(innerPadding),
                         builder = {
                             composable<HomeScreen> {
                                 topBarTitle="Home"
                                 isHome=true
-                                HomeScreenCore(navController, innerPadding)
+                                HomeScreenCore(navController)
                             }
                             composable<DetailsScreen> {
                                 topBarTitle="Details"
@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                                 val character = Json.decodeFromString<Character>(
                                     URLDecoder.decode(args.character, "UTF-8")
                                 )
-                                DetailsScreenCore(innerPadding, character)
+                                DetailsScreenCore(character)
                             }
                         },
                     )
