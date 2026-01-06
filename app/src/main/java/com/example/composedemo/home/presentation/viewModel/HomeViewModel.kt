@@ -31,17 +31,17 @@ class HomeViewModel(private val getUniversitiesUseCase: GetUniversitiesUseCase) 
     private fun loadUniversities() {
         viewModelScope.launch {
             getUniversitiesUseCase().collect { resource ->
-                when (resource) {
+                homeState = when (resource) {
                     Resource.Loading -> {
-                        homeState = homeState.copy(isLoading = true)
+                        homeState.copy(isLoading = true)
                     }
 
                     is Resource.Error -> {
-                        homeState = homeState.copy(isLoading = false, isError = true, resource.errorMsg)
+                        homeState.copy(isLoading = false, isError = true, error = resource.errorMsg)
                     }
 
                     is Resource.Success -> {
-                        homeState = homeState.copy(isLoading = false, isError = false, characters = resource.data)
+                        homeState.copy(isLoading = false, isError = false, characters = resource.data)
                     }
                 }
             }

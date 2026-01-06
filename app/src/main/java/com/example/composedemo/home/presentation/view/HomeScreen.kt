@@ -28,6 +28,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -69,12 +71,12 @@ fun HomeScreenCore(navController: NavController, viewModel: HomeViewModel = koin
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController, homeState: HomeScreenState, actions: (HomeScreenActions) -> Unit) {
-    val hasLoaded = rememberSaveable { mutableStateOf(false) }
+    var hasLoaded by rememberSaveable { mutableStateOf(false) }
     //Currently calling multiple time
     LaunchedEffect(navController) {
-        if (!hasLoaded.value) {
+        if (!hasLoaded) {
             actions(HomeScreenActions.ActionSearch())
-            hasLoaded.value = true
+            hasLoaded = true
         }
     }
     if (homeState.isLoading) {

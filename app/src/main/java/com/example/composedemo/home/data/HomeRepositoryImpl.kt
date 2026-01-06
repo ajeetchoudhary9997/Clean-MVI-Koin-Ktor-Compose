@@ -12,6 +12,6 @@ import io.ktor.client.request.get
  */
 class HomeRepositoryImpl(val httpClient: HttpClient): HomeRepository {
     override suspend fun loadCharacters(): RickAndMortyDto {
-        return httpClient.get(HttpRoutes.CHARACTER,).body()
+        return httpClient.get(HttpRoutes.CHARACTER,).body<RickAndMortyDto>()
     }
 }
